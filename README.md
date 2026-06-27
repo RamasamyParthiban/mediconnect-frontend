@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
@@ -71,3 +72,7 @@ export default defineConfig([
   },
 ])
 ```
+=======
+# mediconnect-frontend
+A platform where patients can find doctors, book appointments, get digital prescriptions, and doctors can manage their practice.
+>>>>>>> df912c3b47b0a8c194c76ac807599aab2cc37c05
