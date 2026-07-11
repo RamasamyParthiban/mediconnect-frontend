@@ -16,6 +16,17 @@ function Login() {
   const navigate = useNavigate();
 
   async function handleSubmit() {
+
+    if(!(email.trim() || email.includes('@'))){
+      setError('Please enter valid email!')
+      return;
+    }
+
+    if(password.length < 6){
+      setError('Please enter valid Password!')
+      return;
+    }
+
     setLoading(true);
     setError("");
     try {

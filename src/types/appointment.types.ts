@@ -9,7 +9,7 @@ export interface AppointmentResponse {
     doctorId : number
     patientId : number
     slotId : number
-    bookedAt : string
+    booksAt : string
     notes : string
     appointmentStatus : 'PENDING' | 'CONFIRMED' | 'CANCELLED'
 }
