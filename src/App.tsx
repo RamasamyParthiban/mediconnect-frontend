@@ -6,6 +6,7 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import PatientDashboard from "./pages/patient/PatientDashboard";
 import DoctorSearch from "./pages/patient/DoctorSearch";
+import MyAppointments from "./pages/patient/MyAppointments";
 
 function AppContent() {
   const location = useLocation();
@@ -30,7 +31,7 @@ function AppContent() {
           <Route path="/patient/doctors" element={<DoctorSearch/>} />
           <Route
             path="/patient/appointments"
-            element={<div>My Appointments</div>}
+            element={<MyAppointments/>}
           />
           <Route
             path="/patient/prescriptions"

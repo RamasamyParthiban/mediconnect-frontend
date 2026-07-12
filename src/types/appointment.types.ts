@@ -11,6 +11,6 @@ export interface AppointmentResponse {
     slotId : number
     booksAt : string
     notes : string
-    appointmentStatus : 'PENDING' | 'CONFIRMED' | 'CANCELLED'
+    appointmentStatus : 'PENDING' | 'CONFIRMED' | 'CANCELLED' | 'COMPLETED'
 }
 
