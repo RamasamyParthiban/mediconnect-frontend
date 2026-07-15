@@ -7,6 +7,8 @@ import Footer from "./components/Footer";
 import PatientDashboard from "./pages/patient/PatientDashboard";
 import DoctorSearch from "./pages/patient/DoctorSearch";
 import MyAppointments from "./pages/patient/MyAppointments";
+import PDFTest from "./test/PDFTest";
+import MyPrescriptions from "./pages/patient/MyPrescriptions";
 
 function AppContent() {
   const location = useLocation();
@@ -19,6 +21,9 @@ function AppContent() {
   return (
     <div className="min-h-screen flex flex-col">
       {showLayout && <Navbar />}
+      <Routes>
+        <Route path="/test" element={<PDFTest/>} />
+      </Routes>
       <main className="flex-1">
         <Routes>
           <Route path="/" element={<div>Landing Page</div>} />
@@ -35,7 +40,7 @@ function AppContent() {
           />
           <Route
             path="/patient/prescriptions"
-            element={<div>My Prescriptions</div>}
+            element={<MyPrescriptions/>}
           />
           <Route path="/patient/payments" element={<div>My Payments</div>} />
           <Route
