@@ -33,7 +33,7 @@ function PatientDashboard() {
 
   const totalPrescriptions = prescriptions.length;
 
-  const totalPayments = payments.reduce((sum, p) => sum + p.amount, 0);
+  const totalPayments = payments.filter(p => p.paymentStatus==='SUCCESS').reduce((sum, p) => sum + p.amount, 0);
 
   useEffect(() => {
     fetchData();
