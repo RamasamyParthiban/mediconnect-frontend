@@ -13,6 +13,8 @@ function DoctorSearch() {
 
   const [error, setError] = useState("");
 
+  const [notes, setNotes] = useState('')
+
   //which doctor's slots are showing
   const [selectedDoctorId, setSelectedDoctorId] = useState<number | null>(null);
 
@@ -85,11 +87,12 @@ function DoctorSearch() {
       await bookAppointment({
         doctorId: selectedDoctor.id,
         slotId: selectedSlot.id,
-        notes: "",
+        notes: notes,
       });
       setSuccessMessage(`Appointment booked with Dr. ${selectedDoctor.name}!`);
       setSelectedSlot(null);
       setSelectedDoctor(null);
+      setNotes('')
       //Navigate to appointments after 2 seconds
       setTimeout(() => navigate("/patient/appointments"), 2000);
     } catch (err) {
@@ -281,11 +284,20 @@ function DoctorSearch() {
                 <span className="font-semibold">Consultation Fee:</span> ₹{selectedDoctor.consultationFee}
               </p>
             </div>
+            <div className="mb-6">
+              <label className="block text-gray-700 font-medium mb-2">
+                📝 Symptoms / Notes 
+                <span className="text-gray-400 font-normal ml-1">(Optional)</span>
+              </label>
+              <textarea value={notes} onChange={(e) => setNotes(e.target.value)} placeholder="Describe your symptoms or reason for visit..."
+                rows={3} className="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:border-blue-500 resize-none"/>
+            </div>
             <div className="flex gap-4">
               <button
                 onClick={() => {
                   setSelectedSlot(null);
                   setSelectedDoctor(null);
+                  setNotes('');
                 }}
                 className="flex-1 border-2 border-gray-300 text-gray-700 py-3 rounded-lg hover:bg-gray-50 font-semibold"
               >
