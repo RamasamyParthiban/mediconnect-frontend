@@ -17,7 +17,7 @@ function Login() {
 
   async function handleSubmit() {
 
-    if(!(email.trim() || email.includes('@'))){
+    if((!email.trim() || !email.includes('@'))){
       setError('Please enter valid email!')
       return;
     }
@@ -37,6 +37,7 @@ function Login() {
           token: response.token,
           name: response.name,
           role: response.role,
+          userId: response.userId
         }),
       );
 

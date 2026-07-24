@@ -15,6 +15,7 @@ export interface LoginResponse {
     token : string
     name : string
     role : string
+    userId: number
 }
 
 export interface UserResponse {

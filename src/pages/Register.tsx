@@ -213,7 +213,7 @@ function Register() {
               </button>
               <button
                 type="button"
-                onClick={() => setUserData({ ...userData, role: "PATIENT" })}
+                onClick={() => setUserData({ ...userData, role: "DOCTOR" })}
                 className={`flex-1 py-3 rounded-lg border-2 font-semibold transition-colors
                 ${
                   userData.role === "DOCTOR"

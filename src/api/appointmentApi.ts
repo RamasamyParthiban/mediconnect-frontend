@@ -23,7 +23,7 @@ export const cancelAppointment = async (
 export const confirmAppointment = async (
   id: number,
 ): Promise<AppointmentResponse> => {
-  const response = await axiosInstance.put(`/api/apppointments/confirm/${id}`);
+  const response = await axiosInstance.put(`/api/appointments/confirm/${id}`);
 
   return response.data;
 };

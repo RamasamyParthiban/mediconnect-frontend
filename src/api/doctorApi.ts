@@ -17,6 +17,11 @@ export const getDoctorById = async (id: number): Promise<DoctorResponse> => {
    return response.data
 }
 
+export const getDoctorByUserId = async (userId: number): Promise<DoctorResponse> => {
+    const response = await axiosInstance.get(`/api/doctors/userId/${userId}`)
+   return response.data
+}
+
 export const getDoctorsBySpecialization = async (specialization: string): Promise<DoctorResponse[]> => {
     const response = await axiosInstance.get(`/api/doctors/${specialization}`)
 
