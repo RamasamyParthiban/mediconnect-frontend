@@ -10,6 +10,8 @@ import MyAppointments from "./pages/patient/MyAppointments";
 import MyPrescriptions from "./pages/patient/MyPrescriptions";
 import MyPayments from "./pages/patient/MyPayments";
 import DoctorDashboard from "./pages/doctor/DoctorDashboard";
+import DoctorProfile from "./pages/doctor/DoctorProfile";
+import ManageSlots from "./pages/doctor/ManageSlots";
 
 function AppContent() {
   const location = useLocation();
@@ -45,8 +47,8 @@ function AppContent() {
             path="/doctor/dashboard"
             element={<DoctorDashboard />}
           />
-          <Route path="/doctor/profile" element={<div>Doctor Profile</div>} />
-          <Route path="/doctor/slots" element={<div>Add Slots</div>} />
+          <Route path="/doctor/profile" element={<DoctorProfile/>} />
+          <Route path="/doctor/slots" element={<ManageSlots/>} />
           <Route
             path="/doctor/appointments"
             element={<div>Doctor Appointment</div>}

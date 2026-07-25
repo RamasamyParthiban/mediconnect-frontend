@@ -58,6 +58,7 @@ function DoctorSearch() {
     try {
       const doctors = await getAllDoctors();
       setDoctors(doctors);
+      console.log(doctors)
     } catch (error) {
       setError("Failed to fetch doctors!");
     } finally {

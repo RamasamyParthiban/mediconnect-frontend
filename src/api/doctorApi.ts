@@ -1,8 +1,7 @@
 import axiosInstance from "../utils/axiosConfig";
-import type { DoctoerRequest, DoctorResponse, SlotRequest, SlotResponse } from "../types/doctor.types";
+import type { DoctorRequest, DoctorResponse, SlotRequest, SlotResponse } from "../types/doctor.types";
 
-
-export const registerDoctor = async (data: DoctoerRequest): Promise<DoctorResponse> => {
+export const registerDoctor = async (data: DoctorRequest): Promise<DoctorResponse> => {
     const response = await axiosInstance.post("/api/doctors/register", data)
     return response.data
 }
@@ -10,6 +9,10 @@ export const registerDoctor = async (data: DoctoerRequest): Promise<DoctorRespon
 export const addSlot = async (data: SlotRequest): Promise<SlotResponse> => {
     const response = await axiosInstance.post("/api/doctors/slot", data)
     return response.data
+}
+
+export const deleteSlot = async (slotId: number):Promise<void> => {
+    await axiosInstance.delete(`/api/doctors/slot/${slotId}`)
 }
 
 export const getDoctorById = async (id: number): Promise<DoctorResponse> => {
@@ -42,7 +45,7 @@ export const getAllSlots = async (doctorId: number): Promise<SlotResponse[]> => 
     return response.data
 }
 
-export const updateDoctorProfile = async (data: DoctoerRequest): Promise<DoctorResponse> => {
+export const updateDoctorProfile = async (data: DoctorRequest): Promise<DoctorResponse> => {
     const response = await axiosInstance.put("/api/doctors/update", data)
     return response.data
 }

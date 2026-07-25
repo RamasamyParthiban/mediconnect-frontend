@@ -1,6 +1,5 @@
-export interface DoctoerRequest {
+export interface DoctorRequest {
     name : string
-    email : string
     phone : number
     specialization : string
     experience : number
@@ -24,7 +23,7 @@ export interface DoctorResponse {
 }
 
 export interface SlotRequest {
-    datetime : string
+    dateTime : string
 }
 
 export interface SlotResponse {
