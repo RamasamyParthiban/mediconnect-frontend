@@ -31,7 +31,7 @@ function MyAppointments() {
 
       //sort by most recent first!
       const sorted = data.sort(
-        (a, b) => new Date(b.booksAt).getTime() - new Date(a.booksAt).getTime(),
+        (a, b) => new Date(b.appointmentDateTime).getTime() - new Date(a.appointmentDateTime).getTime(),
       );
 
       setAppointments(sorted);
@@ -184,7 +184,10 @@ function MyAppointments() {
                     Dr. {doctorNames[appointment.doctorId] || "loading..."}
                   </h3>
                   <p className="text-gray-500 text-sm mt-1">
-                    📅 Booked: {formatDate(appointment.booksAt)}
+                    🕐 Appointment : {formatDate(appointment.appointmentDateTime)}
+                  </p>
+                  <p className="text-gray-400 text-xs mt-1">
+                    📅 Booked on {formatDate(appointment.bookedAt)}
                   </p>
                   {appointment.notes && (
                     <p className="text-gray-500 text-sm mt-1">

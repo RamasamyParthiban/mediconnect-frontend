@@ -87,7 +87,7 @@ function Navbar() {
               Appointments
             </Link>
             <Link
-              to="/doctor/prescriptions"
+              to="/doctor/prescription"
               className="text-gray-600 hover:text-blue-600 font-medium"
             >
               Write Prescription

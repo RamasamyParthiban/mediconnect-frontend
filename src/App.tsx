@@ -12,6 +12,8 @@ import MyPayments from "./pages/patient/MyPayments";
 import DoctorDashboard from "./pages/doctor/DoctorDashboard";
 import DoctorProfile from "./pages/doctor/DoctorProfile";
 import ManageSlots from "./pages/doctor/ManageSlots";
+import DoctorAppointments from "./pages/doctor/DoctorAppointments";
+import WritePrescription from "./pages/doctor/WritePrescription";
 
 function AppContent() {
   const location = useLocation();
@@ -51,11 +53,11 @@ function AppContent() {
           <Route path="/doctor/slots" element={<ManageSlots/>} />
           <Route
             path="/doctor/appointments"
-            element={<div>Doctor Appointment</div>}
+            element={<DoctorAppointments />}
           />
           <Route
             path="/doctor/prescription"
-            element={<div>Write Prescriptions</div>}
+            element={<WritePrescription />}
           />
            <Route
             path="/about"

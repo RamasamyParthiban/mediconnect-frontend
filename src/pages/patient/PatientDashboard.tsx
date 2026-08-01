@@ -174,8 +174,11 @@ function PatientDashboard() {
                   <p className="font-medium text-gray-800">
                     Appointment #{appointment.id}
                   </p>
-                  <p className="text-gray-500 text-sm">
-                    {formatDate(appointment.booksAt)}
+                  <p className="text-gray-500 text-sm mt-1">
+                    🕐 Appointment: {formatDate(appointment.appointmentDateTime)}
+                  </p>
+                  <p className="text-gray-400 text-xs mt-1">
+                   📅 Bookd on {formatDate(appointment.bookedAt)}
                   </p>
                 </div>
                 <span

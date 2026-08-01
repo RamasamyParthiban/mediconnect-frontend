@@ -39,7 +39,7 @@ function DoctorDashboard() {
       const [appointmentData] = await Promise.all([getDoctorAppointments()]);
 
       const sorted = appointmentData.sort(
-        (a, b) => new Date(b.booksAt).getTime() - new Date(a.booksAt).getTime(),
+        (a, b) => new Date(a.appointmentDateTime).getTime() - new Date(b.appointmentDateTime).getTime(),
       );
       setAppointments(sorted);
 
@@ -302,8 +302,9 @@ function DoctorDashboard() {
                     <p className="font-semibold text-gray-800">
                       Patient #{appointment.patientId}
                     </p>
-                    <p className="text-gray-500 text-sm mt-1">
-                      📅 {formatDate(appointment.booksAt)}
+                    <p className="text-gray-500 text-sm mt-1">🕐 Appointment {formatDate(appointment.appointmentDateTime)}</p>
+                    <p className="text-gray-400 text-xs mt-1">
+                      📅 Booked on {formatDate(appointment.bookedAt)}
                     </p>
                     {appointment.notes && (
                       <p className="text-gray-500 text-sm mt-1">
@@ -358,7 +359,7 @@ function DoctorDashboard() {
                   {/* Write Prescription - COMPLETED only */}
                   {appointment.appointmentStatus === "COMPLETED" && (
                     <button
-                      onClick={() => navigate("/doctor/prescription")}
+                      onClick={() => navigate(`/doctor/prescription?appointmentId=${appointment.id}`)}
                       className="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors text-sm font-medium"
                     >
                       💊 Write Prescription
