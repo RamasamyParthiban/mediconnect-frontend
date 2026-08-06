@@ -9,6 +9,7 @@ import {
   getAllSlots,
   getDoctorByUserId,
 } from "../../api/doctorApi";
+import axios from "axios";
 
 
 function ManageSlots() {
