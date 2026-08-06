@@ -27,7 +27,10 @@ function DoctorAppointments() {
 
   useEffect(() => {
     fetchData();
-  }, []);
+   const timer = setTimeout(() => {
+      setError('')
+    },4000)
+  }, [error]);
 
   async function fetchData() {
     try {

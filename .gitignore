@@ -159,8 +159,17 @@ dist
 !.yarn/sdks
 !.yarn/versions
 
+# Environment files
+
+.env
+.env.local
+.env.*.local
+
 # Vite files
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 .vite/
 >>>>>>> df912c3b47b0a8c194c76ac807599aab2cc37c05
+
+
+

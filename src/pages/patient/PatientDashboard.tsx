@@ -33,7 +33,9 @@ function PatientDashboard() {
 
   const totalPrescriptions = prescriptions.length;
 
-  const totalPayments = payments.filter(p => p.paymentStatus==='SUCCESS').reduce((sum, p) => sum + p.amount, 0);
+  const totalPayments = payments
+    .filter((p) => p.paymentStatus === "SUCCESS")
+    .reduce((sum, p) => sum + p.amount, 0);
 
   useEffect(() => {
     fetchData();
@@ -58,7 +60,6 @@ function PatientDashboard() {
   }
 
   function formatDate(dateString: string) {
-
     if (!dateString) return "N/A";
 
     // Keep only first 23 chars → "2026-06-21T01:15:46.768"
@@ -75,6 +76,21 @@ function PatientDashboard() {
       hour: "2-digit",
       minute: "2-digit",
     });
+  }
+
+  function getStatusColor(status: string) {
+    switch (status) {
+      case "PENDING":
+        return "bg-yellow-100 text-yellow-700";
+      case "CONFIRMED":
+        return "bg-blue-100 text-blue-700";
+      case "COMPLETED":
+        return "bg-green-100 text-green-700";
+      case "CANCELLED":
+        return "bg-red-100 text-red-700";
+      default:
+        return "bg-gray-100 text-gray-700";
+    }
   }
 
   if (loading) {
@@ -175,19 +191,15 @@ function PatientDashboard() {
                     Appointment #{appointment.id}
                   </p>
                   <p className="text-gray-500 text-sm mt-1">
-                    🕐 Appointment: {formatDate(appointment.appointmentDateTime)}
+                    🕐 Appointment:{" "}
+                    {formatDate(appointment.appointmentDateTime)}
                   </p>
                   <p className="text-gray-400 text-xs mt-1">
-                   📅 Bookd on {formatDate(appointment.bookedAt)}
+                    📅 Bookd on {formatDate(appointment.bookedAt)}
                   </p>
                 </div>
                 <span
-                  className={`px-3 py-1 rounded-full text-sm font-medium
-                ${
-                  appointment.appointmentStatus === "CANCELLED"
-                    ? "bg-red-100 text-red-600"
-                    : "bg-green-100 text-green-600"
-                }`}
+                  className={`px-3 py-1 rounded-full text-sm font-medium ${getStatusColor(appointment.appointmentStatus)}`}
                 >
                   {appointment.appointmentStatus}
                 </span>

@@ -14,6 +14,8 @@ import DoctorProfile from "./pages/doctor/DoctorProfile";
 import ManageSlots from "./pages/doctor/ManageSlots";
 import DoctorAppointments from "./pages/doctor/DoctorAppointments";
 import WritePrescription from "./pages/doctor/WritePrescription";
+import ProtectedRoute from "./components/ProtectedRoute";
+import Landing from "./pages/Landing";
 
 function AppContent() {
   const location = useLocation();
@@ -28,49 +30,87 @@ function AppContent() {
       {showLayout && <Navbar />}
       <main className="flex-1">
         <Routes>
-          <Route path="/" element={<div>Landing Page</div>} />
+          <Route path="/" element={<Landing />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+
           <Route
             path="/patient/dashboard"
-            element={<PatientDashboard/>}
+            element={
+              <ProtectedRoute allowedRole="PATIENT">
+                <PatientDashboard />{" "}
+              </ProtectedRoute>
+            }
           />
-          <Route path="/patient/doctors" element={<DoctorSearch/>} />
+
+          <Route
+            path="/patient/doctors"
+            element={
+              <ProtectedRoute allowedRole="PATIENT">
+                <DoctorSearch />
+              </ProtectedRoute>
+            }
+          />
           <Route
             path="/patient/appointments"
-            element={<MyAppointments/>}
+            element={
+              <ProtectedRoute allowedRole="PATIENT">
+                <MyAppointments />
+              </ProtectedRoute>
+            }
           />
           <Route
             path="/patient/prescriptions"
-            element={<MyPrescriptions/>}
+            element={
+              <ProtectedRoute allowedRole="PATIENT">
+                <MyPrescriptions />
+              </ProtectedRoute>
+            }
           />
-          <Route path="/patient/payments" element={<MyPayments/>} />
+          <Route
+            path="/patient/payments"
+            element={
+              <ProtectedRoute allowedRole="PATIENT">
+                <MyPayments />
+              </ProtectedRoute>
+            }
+          />
           <Route
             path="/doctor/dashboard"
-            element={<DoctorDashboard />}
+            element={
+              <ProtectedRoute allowedRole="DOCTOR">
+                <DoctorDashboard />
+              </ProtectedRoute>
+            }
           />
-          <Route path="/doctor/profile" element={<DoctorProfile/>} />
-          <Route path="/doctor/slots" element={<ManageSlots/>} />
+          <Route
+            path="/doctor/profile"
+            element={
+              <ProtectedRoute allowedRole="DOCTOR">
+                <DoctorProfile />
+              </ProtectedRoute>
+            }
+          />
+          <Route path="/doctor/slots" element={<ManageSlots />} />
           <Route
             path="/doctor/appointments"
-            element={<DoctorAppointments />}
+            element={
+              <ProtectedRoute allowedRole="DOCTOR">
+                <DoctorAppointments />
+              </ProtectedRoute>
+            }
           />
           <Route
             path="/doctor/prescription"
-            element={<WritePrescription />}
+            element={
+              <ProtectedRoute allowedRole="DOCTOR">
+                <WritePrescription />
+              </ProtectedRoute>
+            }
           />
-           <Route
-            path="/about"
-            element={<div>About Us</div>}
-          />
-           <Route
-            path="/contact"
-            element={<div>Contact Us</div>}
-          />
-           <Route
-            path="/terms"
-            element={<div>Terms and Condition</div>}
-          />
+          <Route path="/about" element={<div>About Us</div>} />
+          <Route path="/contact" element={<div>Contact Us</div>} />
+          <Route path="/terms" element={<div>Terms and Condition</div>} />
         </Routes>
       </main>
       {showLayout && <Footer />}
