@@ -9,7 +9,7 @@ import {
   getAllSlots,
   getDoctorByUserId,
 } from "../../api/doctorApi";
-import axios, { isAxiosError } from "axios";
+
 
 function ManageSlots() {
   const [slots, setSlots] = useState<SlotResponse[]>([]);
@@ -27,7 +27,7 @@ function ManageSlots() {
 
   useEffect(() => {
     fetchData();
-    const timer = setTimeout(() => {
+    setTimeout(() => {
         setError('')
         setSuccess('')
     },4000)
