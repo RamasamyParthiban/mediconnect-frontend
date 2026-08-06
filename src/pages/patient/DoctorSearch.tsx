@@ -13,7 +13,7 @@ function DoctorSearch() {
 
   const [error, setError] = useState("");
 
-  const [notes, setNotes] = useState('')
+  const [notes, setNotes] = useState("");
 
   //which doctor's slots are showing
   const [selectedDoctorId, setSelectedDoctorId] = useState<number | null>(null);
@@ -24,7 +24,7 @@ function DoctorSearch() {
     null,
   );
   const [bookingLoading, setBookingLoading] = useState(false);
-  const[hasSearched, setHasSearched] = useState(false)
+  const [hasSearched, setHasSearched] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
 
   const navigate = useNavigate();
@@ -32,14 +32,14 @@ function DoctorSearch() {
   async function handleSearch() {
     if (!specialization.trim()) {
       setError("Please enter a specialization");
-      setDoctors([])
-      setSelectedDoctorId(null)
-      setHasSearched(false)
+      setDoctors([]);
+      setSelectedDoctorId(null);
+      setHasSearched(false);
       return;
     }
     setLoading(true);
-    setHasSearched(true)
-    setError('');
+    setHasSearched(true);
+    setError("");
     try {
       const doctors = await getDoctorsBySpecialization(specialization);
       setDoctors(doctors);
@@ -54,11 +54,11 @@ function DoctorSearch() {
     setLoading(true);
     setError("");
     setSpecialization("");
-    setHasSearched(true)
+    setHasSearched(true);
     try {
       const doctors = await getAllDoctors();
       setDoctors(doctors);
-      console.log(doctors)
+      console.log(doctors);
     } catch (error) {
       setError("Failed to fetch doctors!");
     } finally {
@@ -93,7 +93,7 @@ function DoctorSearch() {
       setSuccessMessage(`Appointment booked with Dr. ${selectedDoctor.name}!`);
       setSelectedSlot(null);
       setSelectedDoctor(null);
-      setNotes('')
+      setNotes("");
       //Navigate to appointments after 2 seconds
       setTimeout(() => navigate("/patient/appointments"), 2000);
     } catch (err) {
@@ -102,6 +102,11 @@ function DoctorSearch() {
     } finally {
       setBookingLoading(false);
     }
+  }
+
+  function getFutureSlots(slots: SlotResponse[]) {
+    if (!slots) return [];
+    return slots.filter((s) => new Date(s.dateTime) > new Date());
   }
 
   function formatDate(dateString: string) {
@@ -182,8 +187,8 @@ function DoctorSearch() {
 
       {!loading && hasSearched && doctors.length === 0 && (
         <div className="bg-white rounded-xl shadow p-8 text-center">
-            <p className="text-gray-400 text-xl">😔 No doctors found!</p>
-            <p className="text-gray-400 mt-2">Try a different specialization</p>
+          <p className="text-gray-400 text-xl">😔 No doctors found!</p>
+          <p className="text-gray-400 mt-2">Try a different specialization</p>
         </div>
       )}
 
@@ -234,9 +239,9 @@ function DoctorSearch() {
                   Available Slots:{" "}
                 </h4>
 
-                {doctor.slots && doctor.slots.length > 0 ? (
+                {getFutureSlots(doctor.slots).length > 0 ? (
                   <div className="flex flex-wrap gap-3">
-                    {doctor.slots.map((slot) => (
+                    {getFutureSlots(doctor.slots).map((slot) => (
                       <button
                         key={slot.id}
                         onClick={() => handleSlotClick(slot, doctor)}
@@ -254,7 +259,7 @@ function DoctorSearch() {
                     ))}
                   </div>
                 ) : (
-                  <p className="text-gray-400">No Slots Available!</p>
+                  <p className="text-gray-400">No upcoming slots available!</p>
                 )}
               </div>
             )}
@@ -271,7 +276,8 @@ function DoctorSearch() {
             </h3>
             <div className="bg-gray-50 rounded-lg p-4 mb-6">
               <p className="text-gray-600">
-                <span className="font-semibold">Doctor:</span> Dr. {selectedDoctor.name}
+                <span className="font-semibold">Doctor:</span> Dr.{" "}
+                {selectedDoctor.name}
               </p>
               <p className="text-gray-600 mt-2">
                 <span className="font-semibold">
@@ -279,26 +285,35 @@ function DoctorSearch() {
                 </span>
               </p>
               <p className="text-gray-600 mt-2">
-                <span className="font-semibold">Date & Time:</span>{formatDate(selectedSlot.dateTime)}
+                <span className="font-semibold">Date & Time:</span>
+                {formatDate(selectedSlot.dateTime)}
               </p>
               <p className="text-gray-600 mt-2">
-                <span className="font-semibold">Consultation Fee:</span> ₹{selectedDoctor.consultationFee}
+                <span className="font-semibold">Consultation Fee:</span> ₹
+                {selectedDoctor.consultationFee}
               </p>
             </div>
             <div className="mb-6">
               <label className="block text-gray-700 font-medium mb-2">
-                📝 Symptoms / Notes 
-                <span className="text-gray-400 font-normal ml-1">(Optional)</span>
+                📝 Symptoms / Notes
+                <span className="text-gray-400 font-normal ml-1">
+                  (Optional)
+                </span>
               </label>
-              <textarea value={notes} onChange={(e) => setNotes(e.target.value)} placeholder="Describe your symptoms or reason for visit..."
-                rows={3} className="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:border-blue-500 resize-none"/>
+              <textarea
+                value={notes}
+                onChange={(e) => setNotes(e.target.value)}
+                placeholder="Describe your symptoms or reason for visit..."
+                rows={3}
+                className="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:border-blue-500 resize-none"
+              />
             </div>
             <div className="flex gap-4">
               <button
                 onClick={() => {
                   setSelectedSlot(null);
                   setSelectedDoctor(null);
-                  setNotes('');
+                  setNotes("");
                 }}
                 className="flex-1 border-2 border-gray-300 text-gray-700 py-3 rounded-lg hover:bg-gray-50 font-semibold"
               >
