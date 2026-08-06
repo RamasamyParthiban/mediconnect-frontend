@@ -6,7 +6,6 @@ const axiosInstance = axios.create({
 })
 
 axiosInstance.interceptors.request.use((config) => {
-    console.log('Default URL',import.meta.env.VITE_API_URL)
    const token = store.getState().auth.token;
    if(token){
     config.headers.Authorization = `Bearer ${token}`
